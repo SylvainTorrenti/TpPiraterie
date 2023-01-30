@@ -10,6 +10,7 @@ namespace ClassLibraryPiraterie
     {
         public NavireMarchand(int absissa, int ordered, int flag) : base(absissa, ordered, flag)
         {
+            RAYON_RENCONTRE = 20;
         }
 
         public override string Nom()

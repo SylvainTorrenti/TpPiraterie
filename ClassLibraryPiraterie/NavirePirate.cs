@@ -14,8 +14,8 @@ namespace ClassLibraryPiraterie
         public NavirePirate(int absissa, int ordered, int flag, bool damage) : base(absissa, ordered, flag)
         {
             EstEndommage = damage;
+            RAYON_RENCONTRE = 20;
         }
-
         public override string Nom()
         {
             return base.Nom() + "pirate";
@@ -37,6 +37,15 @@ namespace ClassLibraryPiraterie
         public override string? ToString()
         {
             return $"{Nom()} avec drapeau {Flag} en ({Abscissa},{Ordered}) - Il est {Etat()}";
+        }
+        public void Combat(Navire navire)
+        {
+
+        }
+
+        public override void RecoitBoulet()
+        {
+            base.RecoitBoulet();
         }
     }
 }

@@ -9,12 +9,14 @@ namespace ClassLibraryPiraterie
             Abscissa = abscissa;
             Ordered = ordered;
             Flag = flag;
+            RAYON_RENCONTRE = 20;
         }
 
         public int Abscissa { get; protected set; }
         public int Ordered { get; protected set; }
         public int Flag { get; protected set; }
         public bool IsDestroyed { get; protected set; }
+        public int RAYON_RENCONTRE { get; protected set; }
 
         public double Distance (Navire ship)
         {
@@ -46,6 +48,27 @@ namespace ClassLibraryPiraterie
         {
             return $"{Nom()} avec drapeau {Flag} en ({Abscissa},{Ordered}) - Il est {Etat()}";
         }
-        public  
+        public virtual void Rencontre(Navire navire)
+        {
+            if (Distance(navire) < RAYON_RENCONTRE)
+            {
+                if (Flag != navire.Flag)
+                {
+                    Combat(navire);
+                }
+            }
+        }
+        public bool EstPacifique(Navire navire)
+        {
+            if (navire )
+            {
+
+            }
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
     }
 }
