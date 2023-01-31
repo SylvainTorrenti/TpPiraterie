@@ -2,7 +2,7 @@
 
 namespace ClassLibraryPiraterie
 {
-    public class Navire
+    public abstract class Navire
     {
         public Navire(int abscissa, int ordered, int flag)
         {
@@ -27,14 +27,7 @@ namespace ClassLibraryPiraterie
             Abscissa += x;
             Ordered += y;
         }
-        public virtual string Etat()
-        {
-            if (IsDestroyed == true)
-            {
-                return "Coulé";
-            }
-            return "Intact";
-        }
+        public abstract string Etat();
         public bool Coule()
         {
             return IsDestroyed = true;
@@ -48,27 +41,25 @@ namespace ClassLibraryPiraterie
         {
             return $"{Nom()} avec drapeau {Flag} en ({Abscissa},{Ordered}) - Il est {Etat()}";
         }
-        public virtual void Rencontre(Navire navire)
-        {
-            if (Distance(navire) < RAYON_RENCONTRE)
-            {
-                if (Flag != navire.Flag)
-                {
-                    Combat(navire);
-                }
-            }
-        }
+        public abstract void Rencontre(Navire navire);
+               
         public bool EstPacifique(Navire navire)
         {
-            if (navire )
+            if (navire is Pirate)
             {
-
+                return false;
             }
+            return true;
         }
 
         public override bool Equals(object? obj)
         {
-            return base.Equals(obj);
+            if (obj is Pirate)
+            {
+                return false;
+            }
+            return true;
         }
+        public abstract void RecoitBoulet();
     }
 }

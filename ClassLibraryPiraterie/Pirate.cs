@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ClassLibraryPiraterie
 {
-    public class NavirePirate : Navire
+    public class Pirate : Navire
     {
 
         public bool EstEndommage { get;private set; }
 
-        public NavirePirate(int absissa, int ordered, int flag, bool damage) : base(absissa, ordered, flag)
+        public Pirate(int absissa, int ordered, int flag, bool damage) : base(absissa, ordered, flag)
         {
             EstEndommage = damage;
             RAYON_RENCONTRE = 20;
@@ -40,12 +40,38 @@ namespace ClassLibraryPiraterie
         }
         public void Combat(Navire navire)
         {
-
+            if (navire is Pirate)
+            {
+                RecoitBoulet();
+                navire.RecoitBoulet();
+            }
+            else
+            {
+                navire.RecoitBoulet();
+                navire.Coule();
+            }
+        }
+        public override void Rencontre(Navire navire)
+        {
+            if (Distance(navire) < RAYON_RENCONTRE)
+            {
+                if (Flag != navire.Flag)
+                {
+                        Combat(navire);
+                }
+            }
         }
 
         public override void RecoitBoulet()
         {
-            base.RecoitBoulet();
+            if (EstEndommage == true)
+            {
+                IsDestroyed = true;
+            }
+            else
+            {
+                EstEndommage = true;
+            }
         }
     }
 }
